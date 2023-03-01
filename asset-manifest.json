@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/wbs-hacker-news-react/static/css/main.e6c13ad2.css",
-    "main.js": "/wbs-hacker-news-react/static/js/main.8a653b10.js",
-    "static/js/787.b4e8e732.chunk.js": "/wbs-hacker-news-react/static/js/787.b4e8e732.chunk.js",
-    "index.html": "/wbs-hacker-news-react/index.html",
-    "main.e6c13ad2.css.map": "/wbs-hacker-news-react/static/css/main.e6c13ad2.css.map",
-    "main.8a653b10.js.map": "/wbs-hacker-news-react/static/js/main.8a653b10.js.map",
-    "787.b4e8e732.chunk.js.map": "/wbs-hacker-news-react/static/js/787.b4e8e732.chunk.js.map"
+    "main.css": "/therealowenrees.github.io/wbs-hacker-news-react/static/css/main.e6c13ad2.css",
+    "main.js": "/therealowenrees.github.io/wbs-hacker-news-react/static/js/main.2d491fde.js",
+    "static/js/787.b4e8e732.chunk.js": "/therealowenrees.github.io/wbs-hacker-news-react/static/js/787.b4e8e732.chunk.js",
+    "index.html": "/therealowenrees.github.io/wbs-hacker-news-react/index.html",
+    "main.e6c13ad2.css.map": "/therealowenrees.github.io/wbs-hacker-news-react/static/css/main.e6c13ad2.css.map",
+    "main.2d491fde.js.map": "/therealowenrees.github.io/wbs-hacker-news-react/static/js/main.2d491fde.js.map",
+    "787.b4e8e732.chunk.js.map": "/therealowenrees.github.io/wbs-hacker-news-react/static/js/787.b4e8e732.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.8a653b10.js"
+    "static/js/main.2d491fde.js"
   ]
 }
