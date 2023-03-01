@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Search = ( {entries, setEntries }) => {
+const Search = ( {entries, setEntries, setIsLoading }) => {
 
   const [searchText, setSearchText] = useState()
 
@@ -21,7 +21,9 @@ const Search = ( {entries, setEntries }) => {
         type='text' 
         value={searchText} 
         onChange={(e) => setSearchText(e.target.value)}/>
-      <button type='button' onClick={handleSearch}>
+      <button type='button' onClick={() => {
+        handleSearch();
+        setIsLoading(true)}}>
         Submit
       </button>
     </div>
