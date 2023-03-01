@@ -6,14 +6,17 @@ const Search = ( {entries, setEntries }) => {
 
   const handleSearch = () => {
     console.log(`search fired for ${searchText}`)
-    fetch(`http://hn.algolia.com/api/v1/search?query=${searchText}`)
+    fetch(`https://hn.algolia.com/api/v1/search?query=${searchText}`)
     .then(response => response.json())
-    .then(data => setEntries(data.hits)); 
+    .then(data => setEntries(data.hits))
+    .catch(error => {
+      console.log(error)
+      alert('There was an error retrieving the data')
+    })
   }
 
   return (
     <div className='search' id='search'>
-      <h1>Header</h1>
       <input 
         type='text' 
         value={searchText} 
