@@ -65,7 +65,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/a
 
 What should you do locally:
 
-- run "npm instal"l to install the new packages from package.json
+- run "npm install" to install the new packages from package.json
 - run "npm run deploy"
 
 ### `npm run build` fails to minify
