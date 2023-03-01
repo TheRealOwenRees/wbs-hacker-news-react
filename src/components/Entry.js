@@ -2,7 +2,7 @@ const Entry = ({ entry, setIsLoading }) => {
     return (
       <div className='search'>
         {setIsLoading(false)}
-        {entry.title}
+        <a href={entry.url} target="_blank" rel="noreferrer">{entry.title}</a>
       </div>
     );
   };
