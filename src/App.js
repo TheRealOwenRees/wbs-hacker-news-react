@@ -14,7 +14,9 @@ function App() {
       <h1>Hacker News Search</h1>
       <Search entries={entries} setEntries={setEntries} setIsLoading={setIsLoading} />
       {isLoading === true && <img src={loading}></img>}
-      {entries.map((entry) => <Entry entry={entry} setIsLoading={setIsLoading} />)}
+      {entries.length > 0 
+      ? entries.map((entry) => <Entry entry={entry} setIsLoading={setIsLoading} />)
+      : <p>No results were found</p>}
     </div>
   )
 }
