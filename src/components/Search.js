@@ -1,8 +1,12 @@
 import { useState } from "react";
 
-const Search = ( {entries, setEntries, setIsLoading }) => {
+const Search = ( {setEntries, setIsLoading }) => {
 
   const [searchText, setSearchText] = useState()
+
+  const clearEntries = () => {
+    setEntries([])
+  }
 
   const handleSearch = () => {
     console.log(`search fired for ${searchText}`)
@@ -22,13 +26,14 @@ const Search = ( {entries, setEntries, setIsLoading }) => {
         value={searchText} 
         onChange={(e) => setSearchText(e.target.value)}/>
       <button type='button' onClick={() => {
-        handleSearch();
-        setIsLoading(true)}}>
+        clearEntries();
+        setIsLoading(true);
+        handleSearch()}}>
         Submit
       </button>
     </div>
   );
 };
   
-  export default Search;
+export default Search;
   
