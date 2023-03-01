@@ -3,10 +3,6 @@ import { useState } from "react";
 const Search = ({ setEntries, setIsLoading }) => {
   const [searchText, setSearchText] = useState();
 
-  const clearEntries = () => {
-    setEntries([]);
-  };
-
   const handleSearch = () => {
     if (searchText) {
       console.log(`search fired for ${searchText}`);
@@ -45,7 +41,6 @@ const Search = ({ setEntries, setIsLoading }) => {
       <button
         type='search-bar-button'
         onClick={() => {
-          clearEntries();
           setIsLoading(true);
           handleSearch();
         }}
