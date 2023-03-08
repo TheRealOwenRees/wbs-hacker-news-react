@@ -57,13 +57,6 @@ const Search = ({
     console.log("value", value);
     handleSearch(value);
   };
-  const onChange = (event, pageInfo) => {
-    setActivePage(pageInfo.activePage);
-    handleSearch(event.target.attributes.value.value);
-    // setApiUrl(
-    //   "https://swapi.co/api/people/?page=" + page.activePage.toString()
-    // );
-  };
 
   return (
     <>
@@ -91,7 +84,6 @@ const Search = ({
             defaultActivePage={1}
             totalPages={50}
             activePage={activePage}
-            // onPageChange={onChange}
             // onPageChange={(event) =>
             //   handlePagination(event.target.attributes.value.value)
             // }
