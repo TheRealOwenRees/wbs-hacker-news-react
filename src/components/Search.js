@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { Pagination } from "semantic-ui-react";
 
 const Search = ({
@@ -12,9 +12,13 @@ const Search = ({
   const [searchText, setSearchText] = useState();
 
   const clearEntries = () => {
-    setActivePage(1);
+    // setActivePage(1);
     setEntries([]);
   };
+
+  useEffect(() => {
+    setActivePage(1)
+  }, [searchText])
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
@@ -81,7 +85,7 @@ const Search = ({
       <div>
         {entries.length > 0 && (
           <Pagination
-            defaultActivePage={1}
+            // defaultActivePage={1}
             totalPages={50}
             activePage={activePage}
             // onPageChange={(event) =>
