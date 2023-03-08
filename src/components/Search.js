@@ -3,8 +3,14 @@ import { useState } from "react";
 const Search = ({ setEntries, setIsLoading }) => {
   const [searchText, setSearchText] = useState();
 
+  const clearEntries = () => {
+      setEntries([])
+  }
+
   const handleSearch = () => {
+      clearEntries()
     if (searchText) {
+      setIsLoading(true);
       console.log(`search fired for ${searchText}`);
       fetch(`https://hn.algolia.com/api/v1/search?query=${searchText}`)
         .then((response) => response.json())
@@ -24,7 +30,6 @@ const Search = ({ setEntries, setIsLoading }) => {
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       handleSearch();
-      setIsLoading(true);
     }
   };
 
@@ -41,7 +46,6 @@ const Search = ({ setEntries, setIsLoading }) => {
       <button
         type='search-bar-button'
         onClick={() => {
-          setIsLoading(true);
           handleSearch();
         }}
       >
