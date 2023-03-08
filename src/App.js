@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { Pagination } from "semantic-ui-react";
-import PaginationExample from "./components/PaginationExample";
 import Search from "./components/Search";
 import EmptyResult from "./components/EmptyResult";
 import Entry from "./components/Entry";
@@ -10,33 +8,23 @@ function App() {
   const [entries, setEntries] = useState([]);
   const [emptyResult, setEmptyResult] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [defaultActivePage, setDefaultActivePage] = useState();
+  const [activePage, setActivePage] = useState(1);
   const [totalPages, setTotalPages] = useState();
 
   useEffect(() => {
     setIsLoading(false);
   }, [entries]);
 
-  const handlePagination = () => {};
-
   return (
     <div>
       <Search
         entries={entries}
+        activePage={activePage}
         setEntries={setEntries}
         setIsLoading={setIsLoading}
         setEmptyResult={setEmptyResult}
+        setActivePage={setActivePage}
       />
-      <div>
-        {entries.length > 0 && (
-          // Array.from({ length: 50 }, (_, i) => (
-          //   <div className='pageLink' key={i} onClick={handlePagination}>
-          //     {i}
-          //   </div>
-          // ))
-          <PaginationExample />
-        )}
-      </div>
       <div>
         {emptyResult && <EmptyResult />}
         {isLoading === true && <img src={loading} alt='loading'></img>}
