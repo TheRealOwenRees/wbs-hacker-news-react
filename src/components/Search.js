@@ -3,32 +3,30 @@ import { Pagination } from "semantic-ui-react";
 
 const Search = ({ entries, setEntries, setIsLoading, setEmptyResult }) => {
   const [searchText, setSearchText] = useState();
-  const [activePage, setActivePage] = useState(1);
-  const [apiUrl, setApiUrl] = useState("https://hn.algolia.com/api/v1/");
+  const [activePage, setActivePage] = useState(0);
+  const [numberPages, setNumberPages] = useState(0);
+  const [numberEntries, setNumberEntries] = useState(0);
+  const [apiUrl, setApiUrl] = useState();
 
   const clearEntries = () => {
-    // setActivePage(1);
     setEntries([]);
   };
 
   useEffect(() => {
-    clearEntries();
-  }, []);
-
-  useEffect(() => {
     if (searchText) {
       console.log(`search fired for ${searchText}`);
-      fetch(
-        `https://hn.algolia.com/api/v1/search?query=${searchText}&page=${activePage}`
-      )
+      fetch(apiUrl)
         .then((response) => response.json())
         .then((data) => {
-          if (data.nbHits > 0) {
+          if (data.hits.length > 0) {
             console.log(data);
             setEmptyResult(false);
+            setNumberPages(data.nbPages);
+            setNumberEntries(data.nbHits);
             clearEntries();
             setEntries(data.hits);
           } else {
+            clearEntries();
             setEmptyResult(true);
           }
         })
@@ -38,6 +36,13 @@ const Search = ({ entries, setEntries, setIsLoading, setEmptyResult }) => {
         });
     }
   }, [apiUrl]);
+
+  const handleSubmit = () => {
+    setActivePage(1);
+    setApiUrl(
+      `https://hn.algolia.com/api/v1/search?query=${searchText}&page=${activePage}`
+    );
+  };
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
@@ -68,28 +73,16 @@ const Search = ({ entries, setEntries, setIsLoading, setEmptyResult }) => {
           onChange={(e) => setSearchText(e.target.value)}
           onKeyUp={handleKeyPress}
         />
-        <button
-          type='search-bar-button'
-          // onClick={() => {
-          //   handleSearch(activePage);
-          // }}
-        >
+        <button type='search-bar-button' onClick={handleSubmit}>
           search
         </button>
       </div>
       <div>
         {entries.length > 0 && (
           <Pagination
-            // defaultActivePage={1}
-            totalPages={50}
+            totalPages={numberPages - 1}
             activePage={activePage}
             onPageChange={onChange}
-            // onPageChange={(event) =>
-            //   handlePagination(event.target.attributes.value.value)
-            // }
-            // onClick={(event) =>
-            //   handlePagination(event.target.attributes.value.value)
-            // }
           />
         )}
       </div>
