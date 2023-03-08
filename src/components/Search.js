@@ -1,35 +1,42 @@
 import { useState } from "react";
-import PaginationBar from "./PaginationBar";
+import { Pagination } from "semantic-ui-react";
 
 const Search = ({
   entries,
   setEntries,
   setIsLoading,
+  activePage,
   setActivePage,
   setEmptyResult,
-  activePage,
 }) => {
   const [searchText, setSearchText] = useState();
 
   const clearEntries = () => {
+    setActivePage(1);
     setEntries([]);
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSearch(activePage);
+    }
+  };
+
   const handleSearch = (activePage = false) => {
-    clearEntries();
+    // activePage && setActivePage(activePage);
+    console.log("activePage", activePage);
     if (searchText) {
       setIsLoading(true);
       console.log(`search fired for ${searchText}`);
-      console.log(`activePage ${activePage}`);
       fetch(
         `https://hn.algolia.com/api/v1/search?query=${searchText}&page=${activePage}`
       )
-        // `https://hn.algolia.com/api/v1/search?query=${searchText})`
         .then((response) => response.json())
         .then((data) => {
           if (data.nbHits > 0) {
             console.log(data);
             setEmptyResult(false);
+            clearEntries();
             setEntries(data.hits);
           } else {
             setEmptyResult(true);
@@ -44,16 +51,18 @@ const Search = ({
     }
   };
 
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
-      handleSearch();
-    }
-  };
-
   const handlePagination = (value) => {
-    console.log(value);
+    // // clearEntries();
     setActivePage(value);
+    console.log("value", value);
     handleSearch(value);
+  };
+  const onChange = (event, pageInfo) => {
+    setActivePage(pageInfo.activePage);
+    handleSearch(event.target.attributes.value.value);
+    // setApiUrl(
+    //   "https://swapi.co/api/people/?page=" + page.activePage.toString()
+    // );
   };
 
   return (
@@ -78,14 +87,17 @@ const Search = ({
       </div>
       <div>
         {entries.length > 0 && (
-          // Array.from({ length: 50 }, (_, i) => (
-          //   <div className='pageLink' key={i} onClick={handlePagination}>
-          //     {i}
-          //   </div>
-          // ))
-          <PaginationBar
-            handlePagination={handlePagination}
+          <Pagination
+            defaultActivePage={1}
+            totalPages={50}
             activePage={activePage}
+            // onPageChange={onChange}
+            // onPageChange={(event) =>
+            //   handlePagination(event.target.attributes.value.value)
+            // }
+            onClick={(event) =>
+              handlePagination(event.target.attributes.value.value)
+            }
           />
         )}
       </div>
