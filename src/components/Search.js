@@ -5,12 +5,12 @@ const Search = ({ entries, setEntries, setIsLoading, setEmptyResult }) => {
   const [searchText, setSearchText] = useState();
   const [activePage, setActivePage] = useState(0);
   const [numberPages, setNumberPages] = useState(0);
-  const [numberEntries, setNumberEntries] = useState(0);
+  // const [numberEntries, setNumberEntries] = useState(0);
   const [apiUrl, setApiUrl] = useState();
 
-  const clearEntries = () => {
-    setEntries([]);
-  };
+  // const clearEntries = () => {
+  //   setEntries([]);
+  // };
 
   useEffect(() => {
     if (searchText) {
@@ -22,11 +22,11 @@ const Search = ({ entries, setEntries, setIsLoading, setEmptyResult }) => {
             console.log(data);
             setEmptyResult(false);
             setNumberPages(data.nbPages);
-            setNumberEntries(data.nbHits);
-            clearEntries();
+            // setNumberEntries(data.nbHits);
+            setEntries([]);
             setEntries(data.hits);
           } else {
-            clearEntries();
+            setEntries([]);
             setEmptyResult(true);
           }
         })
@@ -38,17 +38,17 @@ const Search = ({ entries, setEntries, setIsLoading, setEmptyResult }) => {
   }, [apiUrl]);
 
   const handleSubmit = () => {
-    setActivePage(1);
+    setActivePage(0);
     setApiUrl(
-      `https://hn.algolia.com/api/v1/search?query=${searchText}&page=${activePage}`
+      `https://hn.algolia.com/api/v1/search?query=${searchText}&page=0`
     );
   };
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
-      setActivePage(1);
+      setActivePage(0);
       setApiUrl(
-        `https://hn.algolia.com/api/v1/search?query=${searchText}&page=${activePage}`
+        `https://hn.algolia.com/api/v1/search?query=${searchText}&page=0`
       );
     }
   };
@@ -56,8 +56,7 @@ const Search = ({ entries, setEntries, setIsLoading, setEmptyResult }) => {
   const onChange = (e, pageInfo) => {
     setActivePage(pageInfo.activePage);
     setApiUrl(
-      `https://hn.algolia.com/api/v1/search?query=${searchText}&page=${pageInfo.activePage}`
-    );
+      `https://hn.algolia.com/api/v1/search?query=${searchText}&page=${pageInfo.activePage-1}`);
   };
 
   return (
@@ -80,7 +79,7 @@ const Search = ({ entries, setEntries, setIsLoading, setEmptyResult }) => {
       <div>
         {entries.length > 0 && (
           <Pagination
-            totalPages={numberPages - 1}
+            totalPages={numberPages}
             activePage={activePage}
             onPageChange={onChange}
           />
