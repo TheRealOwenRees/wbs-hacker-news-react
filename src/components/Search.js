@@ -1,15 +1,10 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { Pagination } from "semantic-ui-react";
 
-const Search = ({
-  entries,
-  setEntries,
-  setIsLoading,
-  activePage,
-  setActivePage,
-  setEmptyResult,
-}) => {
+const Search = ({ entries, setEntries, setIsLoading, setEmptyResult }) => {
   const [searchText, setSearchText] = useState();
+  const [activePage, setActivePage] = useState(1);
+  const [apiUrl, setApiUrl] = useState("https://hn.algolia.com/api/v1/");
 
   const clearEntries = () => {
     // setActivePage(1);
@@ -17,20 +12,11 @@ const Search = ({
   };
 
   useEffect(() => {
-    setActivePage(1)
-  }, [searchText])
+    clearEntries();
+  }, []);
 
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
-      handleSearch(activePage);
-    }
-  };
-
-  const handleSearch = (activePage = false) => {
-    // activePage && setActivePage(activePage);
-    console.log("activePage", activePage);
+  useEffect(() => {
     if (searchText) {
-      setIsLoading(true);
       console.log(`search fired for ${searchText}`);
       fetch(
         `https://hn.algolia.com/api/v1/search?query=${searchText}&page=${activePage}`
@@ -50,22 +36,31 @@ const Search = ({
           console.log(error);
           alert("There was an error retrieving the data");
         });
-    } else {
-      alert("Please enter a search term");
+    }
+  }, [apiUrl]);
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      setActivePage(1);
+      setApiUrl(
+        `https://hn.algolia.com/api/v1/search?query=${searchText}&page=${activePage}`
+      );
     }
   };
 
-  const handlePagination = (value) => {
-    // // clearEntries();
-    setActivePage(value);
-    console.log("value", value);
-    handleSearch(value);
+  const onChange = (e, pageInfo) => {
+    setActivePage(pageInfo.activePage);
+    setApiUrl(
+      `https://hn.algolia.com/api/v1/search?query=${searchText}&page=${pageInfo.activePage}`
+    );
   };
 
   return (
     <>
       <div className='search-bar'>
-        <div className='search-bar-title'><p>Hacker News</p></div>
+        <div className='search-bar-title'>
+          <p>Hacker News</p>
+        </div>
         <input
           className='search-bar-input'
           type='text'
@@ -75,9 +70,9 @@ const Search = ({
         />
         <button
           type='search-bar-button'
-          onClick={() => {
-            handleSearch(activePage);
-          }}
+          // onClick={() => {
+          //   handleSearch(activePage);
+          // }}
         >
           search
         </button>
@@ -88,12 +83,13 @@ const Search = ({
             // defaultActivePage={1}
             totalPages={50}
             activePage={activePage}
+            onPageChange={onChange}
             // onPageChange={(event) =>
             //   handlePagination(event.target.attributes.value.value)
             // }
-            onClick={(event) =>
-              handlePagination(event.target.attributes.value.value)
-            }
+            // onClick={(event) =>
+            //   handlePagination(event.target.attributes.value.value)
+            // }
           />
         )}
       </div>

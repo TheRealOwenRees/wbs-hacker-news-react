@@ -8,8 +8,6 @@ function App() {
   const [entries, setEntries] = useState([]);
   const [emptyResult, setEmptyResult] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [activePage, setActivePage] = useState(1);
-  const [totalPages, setTotalPages] = useState();
 
   useEffect(() => {
     setIsLoading(false);
@@ -19,11 +17,9 @@ function App() {
     <div>
       <Search
         entries={entries}
-        activePage={activePage}
         setEntries={setEntries}
         setIsLoading={setIsLoading}
         setEmptyResult={setEmptyResult}
-        setActivePage={setActivePage}
       />
       <div>
         {emptyResult && <EmptyResult />}
