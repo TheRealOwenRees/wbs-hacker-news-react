@@ -1,22 +1,27 @@
 import { useState } from "react";
 
-const Search = ({ setEntries, setIsLoading }) => {
+const Search = ({ setEntries, setIsLoading, setEmptyResult }) => {
   const [searchText, setSearchText] = useState();
 
   const clearEntries = () => {
-      setEntries([])
-  }
+    setEntries([]);
+  };
 
   const handleSearch = () => {
-      clearEntries()
+    clearEntries();
     if (searchText) {
       setIsLoading(true);
       console.log(`search fired for ${searchText}`);
       fetch(`https://hn.algolia.com/api/v1/search?query=${searchText}`)
         .then((response) => response.json())
         .then((data) => {
-          setEntries(data.hits);
-          console.log(data);
+          if (data.nbHits > 0) {
+            console.log(data);
+            setEmptyResult(false);
+            setEntries(data.hits);
+          } else {
+            setEmptyResult(true);
+          }
         })
         .catch((error) => {
           console.log(error);

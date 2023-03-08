@@ -55,6 +55,7 @@
 }
 
 .result-entry {
+  clear: both;
   margin: 10px;
   padding: 20px 0;
   font-family: Arial, Helvetica, sans-serif;
