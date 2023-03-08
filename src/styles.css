@@ -8,21 +8,26 @@
 .search-bar {
   display: flex;
   height: 80px;
+  /*width: 100%;*/
   background-color: #d81159;
   padding: 10px;
   align-items: center;
 }
 
 .search-bar-title {
-  flex: 0 0 300px;
+  float: left;
+  min-width: 40%;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 40px;
   color: white;
   font-weight: bold;
 }
-
+.search-bar-title p {
+  line-height: 1em;
+}
 .search-bar input {
-  flex: 1 0 auto;
+  width: 100%;
+  min-width: 190px;
   height: 60px;
   margin: 0 20px;
   font-size: 40px;
@@ -31,7 +36,7 @@
 }
 
 .search-bar button {
-  flex: 0 0 300px;
+  padding: 0 20px;
   height: 60px;
   margin: 0 20px;
   color: white;

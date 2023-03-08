@@ -59,7 +59,7 @@ const Search = ({
   return (
     <>
       <div className='search-bar'>
-        <div className='search-bar-title'>Hacker News</div>
+        <div className='search-bar-title'><p>Hacker News</p></div>
         <input
           className='search-bar-input'
           type='text'
