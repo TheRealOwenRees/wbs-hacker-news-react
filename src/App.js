@@ -42,15 +42,11 @@ function App() {
         setApiUrl={setApiUrl}
         setNumberPages={setNumberPages}
         setActivePage={setActivePage}
+        numberEntries={numberEntries}
         setNumberEntries={setNumberEntries}
+        loadingTime={loadingTime}
         setLoadingTime={setLoadingTime}
       />
-
-      {numberEntries > 0 && (
-        <div className="search-meta-data">
-          {numberEntries} results in {loadingTime / 1000}s
-        </div>
-      )}
 
       <div>
         {emptyResult && <EmptyResult />}
@@ -64,7 +60,7 @@ function App() {
             />
           ))}
       </div>
-      <div>
+      <div className="pagination-section">
         {entries.length > 0 && (
           <Pagination
             totalPages={numberPages}

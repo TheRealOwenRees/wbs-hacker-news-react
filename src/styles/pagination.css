@@ -1,0 +1,8 @@
+.pagination-section {
+    display: flex;
+    justify-content: center;;
+}
+
+.ui.pagination.menu {
+    margin: 1em auto;
+}
