@@ -14,6 +14,7 @@ function App() {
   const [apiUrl, setApiUrl] = useState();
   const [searchText, setSearchText] = useState();
   const [numberEntries, setNumberEntries] = useState(0);
+  const [loadingTime, setLoadingTime] = useState();
 
   useEffect(() => {
     setIsLoading(false);
@@ -42,9 +43,14 @@ function App() {
         setNumberPages={setNumberPages}
         setActivePage={setActivePage}
         setNumberEntries={setNumberEntries}
+        setLoadingTime={setLoadingTime}
       />
 
-      {numberEntries && <div>{numberEntries} results</div>}
+      {numberEntries > 0 && (
+        <div className="search-meta-data">
+          {numberEntries} results in {loadingTime / 1000}s
+        </div>
+      )}
 
       <div>
         {emptyResult && <EmptyResult />}

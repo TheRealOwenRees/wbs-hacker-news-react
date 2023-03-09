@@ -10,6 +10,7 @@ const Search = ({
   setNumberPages,
   setActivePage,
   setNumberEntries,
+  setLoadingTime,
 }) => {
   useEffect(() => {
     if (searchText) {
@@ -24,6 +25,7 @@ const Search = ({
             setNumberEntries(data.nbHits);
             setEntries([]);
             setEntries(data.hits);
+            setLoadingTime(data.serverTimeMS);
           } else {
             setEntries([]);
             setEmptyResult(true);
