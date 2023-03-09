@@ -58,45 +58,45 @@ const Search = ({
 
   return (
     <>
-    <div className='search-bar'>
-      <div className='search-title'>
-        <a href='https://konstrukteur.github.io/hacker-news-react/'>
-          <img src={require("../images/logo-hn.png")}></img>
-        </a>
-        <a href='/'>
-          <div className='search-title-label'>
-            Search
-            <br />
-            Hacker News
-          </div>
-        </a>
+      <div className="search-bar">
+        <div className="search-title">
+          <a href="https://konstrukteur.github.io/hacker-news-react/">
+            <img src={require("../images/logo-hn.png")}></img>
+          </a>
+          <a href="/">
+            <div className="search-title-label">
+              Search
+              <br />
+              Hacker News
+            </div>
+          </a>
+        </div>
+        <div className="search-bar-input">
+          <input
+            className="search-input"
+            type="text"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            onKeyUp={handleKeyPress}
+            placeholder="Search stories by title, url or author"
+          />
+        </div>
+        <button
+          className="search-bar-button"
+          type="button"
+          onClick={handleSubmit}
+        >
+          search
+        </button>
       </div>
-      <div className='search-bar-input'>
-        <input
-          className='search-input'
-          type='text'
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-          onKeyUp={handleKeyPress}
-          placeholder='Search stories by title, url or author'
-        />
+      <div className="search-filters-container">
+        <div className="search-filters-selectors"></div>
+        <div className="search-meta-data">
+          {numberEntries > 0 &&
+            `${numberEntries} results (${loadingTime / 1000} seconds)`}
+        </div>
       </div>
-      <button
-        className='search-bar-button'
-        type='button'
-        onClick={handleSubmit}
-      >
-        search
-      </button>
-    </div>
-    <div className='search-filters-container'>
-      <div className='search-filters-selectors'></div>
-      <div className='search-meta-data'>
-        {numberEntries &&
-          `${numberEntries} results (${loadingTime / 1000} seconds)`}
-      </div>
-    </div>
-  </>
+    </>
   );
 };
 
